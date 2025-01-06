@@ -18,7 +18,6 @@ export default function Home() {
       <Link href="/checkout">
         Checkout
       </Link> */}
-      <Navigation />
       <Homepage />
       <OtherComponent />
     </div>
