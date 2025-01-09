@@ -4,9 +4,9 @@ import { ReactNode, useEffect } from 'react';
 import Navigation from './navigation';
 import { useTranslation } from 'react-i18next';
 import '@/app/i18n';
+import {NextUIProvider} from "@nextui-org/react";
 
 // import '../../i18n'; // Import i18next configuration';
-
 interface ProvidersProps {
   children: ReactNode;
 }
@@ -23,7 +23,10 @@ export function Providers({ children }: ProvidersProps) {
     return (
         <>
             {/* <Navigation /> */}
-            {children}
+            <NextUIProvider>
+
+              {children}
+            </NextUIProvider>
         </>
     )
   }

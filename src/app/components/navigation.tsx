@@ -5,31 +5,135 @@ import styles from "./navigation.module.css";
 import { usePathname, useRouter } from "next/navigation";
 import LangSwitcher from "./languageswitcher";
 import { useTranslation } from "react-i18next";
+import {
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  NavbarMenuToggle,
+  NavbarMenu,
+  NavbarMenuItem,
+} from "@nextui-org/navbar";
+import { Button } from "@nextui-org/button";
+import { useEffect, useState } from "react";
 
 export default function Navigation() {
-    // const router = useRouter();
-    const isHome = usePathname() === "/";
-    console.log(isHome);
-    const { t } = useTranslation();
+  const isHome = usePathname() === "/";
+  console.log(isHome);
+  const { t } = useTranslation();
 
-    return (
-        <nav className={`${styles.navigation} ${!isHome ? styles.otherBg : styles.homeBg}`}>
-            <LangSwitcher />
-            <Link href="/" className={styles.navButton}>
+  //check if device is mobile
+  const [isMobile, setIsMobile] = useState(false);
+  //   const [marginLeftVal, setMarginLeft] = useState(`${window.innerWidth * 3}`);
+
+  // console.log("Mobile: ", isMobile);
+  // console.log("Window width: ", window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 800);
+      document.documentElement.style.setProperty(
+        "--window-width",
+        `${window.innerWidth}px`
+      );
+      //   setMarginLeft(`${window.innerWidth * 0.1}px`);
+    };
+
+    // Initial check
+    handleResize();
+
+    // Add event listener
+    window.addEventListener("resize", handleResize);
+
+    // Clean up event listener
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  //navigation menu on mobile
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  // const menuItems = ["Home", "Availability", "Gallery", "Contact"];
+
+  return (
+    <>
+      {isMobile ? (
+        <Navbar
+          className={`${styles.navigation} ${
+            !isHome ? styles.otherBg : styles.homeBg
+          }`}
+          maxWidth="full"
+          position="sticky"
+          onMenuOpenChange={setIsMenuOpen}
+          isMenuOpen={isMenuOpen}
+          // isBlurred={false}
+        >
+          <NavbarContent>
+            <NavbarMenuToggle
+              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+              className="sm:hidden"
+            />
+          </NavbarContent>
+          <NavbarContent>
+            <NavbarItem className={styles.requestButton} onClick={() => setIsMenuOpen(false)}>
+              <Link href="/requestform">
+                {t("request now")}
+              </Link>
+            </NavbarItem>
+          </NavbarContent>
+          <NavbarMenu className={styles.menu}>
+            <NavbarMenuItem className={`${styles.navButton} ${styles.menuNavButton} ${isHome ? '' : styles.otherNav}`}>
+              <Link color="foreground" href="/" onClick={() => setIsMenuOpen(false)}>Home</Link>
+            </NavbarMenuItem>
+            <NavbarMenuItem className={`${styles.navButton} ${styles.menuNavButton} ${isHome ? '' : styles.otherNav}`}>
+              <Link href="/availability" onClick={() => setIsMenuOpen(false)}>{t("availability")}</Link>
+            </NavbarMenuItem>
+            <NavbarMenuItem className={`${styles.navButton} ${styles.menuNavButton} ${isHome ? '' : styles.otherNav}`}>
+              <Link href="/gallery" onClick={() => setIsMenuOpen(false)}>{t("gallery")}</Link>
+            </NavbarMenuItem>
+            <NavbarMenuItem className={`${styles.navButton} ${styles.menuNavButton} ${isHome ? '' : styles.otherNav}`}>
+              <Link href="/contact" onClick={() => setIsMenuOpen(false)}>{t("contact")}</Link>
+            </NavbarMenuItem>
+
+            <NavbarMenuItem>
+              <LangSwitcher />
+            </NavbarMenuItem>
+          </NavbarMenu>
+        </Navbar>
+      ) : (
+        <Navbar
+          className={`${styles.navigation} ${
+            !isHome ? styles.otherBg : styles.homeBg
+          }`}
+          // className={styles.navigation}
+          maxWidth="full"
+          position="static"
+          // isBlurred={false}
+        >
+          <NavbarContent className={styles.langContent} justify="start">
+            <NavbarBrand>
+              <LangSwitcher />
+            </NavbarBrand>
+          </NavbarContent>
+          <NavbarContent className={`${styles.mainContent}`} justify="end">
+            <NavbarItem className={styles.navButton}>
+              <Link color="foreground" href="/">
                 Home
-            </Link>
-            <Link href="/availability" className={styles.navButton}>
-                {t('availability')}
-            </Link>
-            <Link href="/gallery" className={styles.navButton}> 
-                {t('gallery')}
-            </Link>
-            <Link href="/contact" className={styles.navButton}>
-                {t('contact')}
-            </Link>
-            <Link href="/requestform" className={styles.requestButton}>
-                {t('request now')}
-            </Link>
-        </nav>
-    )
+              </Link>
+            </NavbarItem>
+            <NavbarItem className={styles.navButton}>
+              <Link href="/availability">{t("availability")}</Link>
+            </NavbarItem>
+            <NavbarItem className={styles.navButton}>
+              <Link href="/gallery">{t("gallery")}</Link>
+            </NavbarItem>
+            <NavbarItem className={styles.navButton}>
+              <Link href="/contact">{t("contact")}</Link>
+            </NavbarItem>
+            <NavbarItem className={styles.requestButton}>
+              <Link href="/requestform">{t("request now")}</Link>
+            </NavbarItem>
+          </NavbarContent>
+        </Navbar>
+      )}
+    </>
+  );
 }

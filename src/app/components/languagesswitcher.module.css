@@ -3,19 +3,22 @@
     background-color: transparent;
     color: white;
     font-size: 1.1rem;
-    /* padding: 0.5rem 1rem; */
-    /* border: none; */
 }
 
 .langContainer {
     display: flex;
     gap: 0.5rem;
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: calc(var(--navHeight)/2 - 0.7rem)  2rem;
+    padding: calc(var(--navHeight)/2 - 0.7rem)  0.1rem;
 }
 
-.langButton:hover {
-    color: #f1c40f;
+@media (max-width: 800px){
+    .langButton:active {
+        color: #f1c40f;
+    }
+}
+
+@media (min-width: 800px){
+    .langButton:hover {
+        color: #f1c40f;
+    }
 }
