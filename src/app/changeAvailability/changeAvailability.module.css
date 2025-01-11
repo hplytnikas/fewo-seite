@@ -1,0 +1,28 @@
+.container {
+    /* margin-top: var(--navHeight); */
+    margin-top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* height: 80vh; */
+}
+
+.title {
+    font-size: 2rem;
+    margin: 3rem;
+}
+
+.editContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+    padding: 1rem;
+    gap: 0.5rem;
+}
+
+.selectItem:hover {
+    text-decoration: line-through;
+}

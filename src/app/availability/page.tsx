@@ -11,20 +11,21 @@ import {
   CalendarDate,
   parseDate
 } from "@internationalized/date";
-import { useLocale } from "@react-aria/i18n";
+// import { useLocale } from "@react-aria/i18n";
 import { useEffect, useState } from "react";
 // import { sql } from '@vercel/postgres';
 import { neon } from '@neondatabase/serverless';
 import dotenv from 'dotenv';
-import FetchDate from "./fetching";
+import {FetchDate} from "./fetching";
 
 export default function Page() {
   dotenv.config();
   const { t } = useTranslation();
-  const { locale } = useLocale();
+  // const { locale } = useLocale();
   const [now, setNow] = useState<DateValue | null>(null);
   const [disabledRanges, setDisabledRanges] = useState<[DateValue, DateValue][]>([]);
 
+  console.log("Disabled Ranges: ", disabledRanges);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -65,7 +66,8 @@ export default function Page() {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>{t("availability title")}</h1>
+      {/* <h1 className={styles.title}>{t("availability title")}</h1> */}
+      <h1 className={styles.title}> Vefügbarkeit</h1>
       <Calendar
         aria-label="Date (Unavailable)"
         isDateUnavailable={isDateUnavailable}
