@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navigation from "./components/navigation";
 import { Providers } from "./components/providers";
+import dotenv from 'dotenv';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,6 +26,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  
+  // console.log(`Test: ${process.env.DATABASE_URL}`);
 
   return (
     <html lang="en">

@@ -14,7 +14,6 @@ import {
   NavbarMenu,
   NavbarMenuItem,
 } from "@nextui-org/navbar";
-import { Button } from "@nextui-org/button";
 import { useEffect, useState } from "react";
 
 export default function Navigation() {
@@ -24,10 +23,6 @@ export default function Navigation() {
 
   //check if device is mobile
   const [isMobile, setIsMobile] = useState(false);
-  //   const [marginLeftVal, setMarginLeft] = useState(`${window.innerWidth * 3}`);
-
-  // console.log("Mobile: ", isMobile);
-  // console.log("Window width: ", window.innerWidth);
 
   useEffect(() => {
     const handleResize = () => {
@@ -36,7 +31,6 @@ export default function Navigation() {
         "--window-width",
         `${window.innerWidth}px`
       );
-      //   setMarginLeft(`${window.innerWidth * 0.1}px`);
     };
 
     // Initial check
@@ -51,7 +45,6 @@ export default function Navigation() {
 
   //navigation menu on mobile
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // const menuItems = ["Home", "Availability", "Gallery", "Contact"];
 
   return (
     <>
