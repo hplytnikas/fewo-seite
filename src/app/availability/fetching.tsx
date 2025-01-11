@@ -23,18 +23,25 @@ export async function FetchDate() {
 export async function addDate(start_date: string, end_date: string) {
     const sql = neon(`${process.env.DATABASE_URL}`);
 
+    const timeZone = 'Europe/Berlin';
+    const formattedStartDate = format(toZonedTime(new Date(start_date), timeZone), 'yyyy-MM-dd');
+    const formattedEndDate = format(toZonedTime(new Date(end_date), timeZone), 'yyyy-MM-dd');
     //first fetch max id
     const maxId = await sql('SELECT MAX(id) FROM availability');
     const id = maxId !== null ? maxId[0].max + 1 : 1;
-    const result = await sql('INSERT INTO availability (id, start_date, end_date) VALUES ($1, $2, $3)', [id, new Date(start_date), new Date(end_date)]);
+    const result = await sql('INSERT INTO availability (id, start_date, end_date) VALUES ($1, $2, $3)', [id, formattedStartDate, formattedEndDate]);
     console.log("result insert:", result);
-
     return result;
 }
 
 export async function deleteDate(start_date: string, end_date: string) {
+
+    const timeZone = 'Europe/Berlin';
+    const formattedStartDate = format(toZonedTime(new Date(start_date), timeZone), 'yyyy-MM-dd');
+    const formattedEndDate = format(toZonedTime(new Date(end_date), timeZone), 'yyyy-MM-dd');
+
     const sql = neon(`${process.env.DATABASE_URL}`);
-    const result = await sql('DELETE FROM availability WHERE start_date = $1 AND end_date = $2', [new Date(start_date), new Date(end_date)]);
+    const result = await sql('DELETE FROM availability WHERE start_date = $1 AND end_date = $2', [formattedStartDate, formattedEndDate]);
     console.log("Deleted:", start_date, end_date);
     console.log("result delete:", result);
 
