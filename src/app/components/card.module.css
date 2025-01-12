@@ -1,0 +1,35 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    margin: 3rem;
+}
+
+.cardBody {
+    height: 30rem;
+    width: 20rem;
+    padding: 1rem;
+    margin: 1rem;    
+}
+
+
+
+.cardContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* background-color: white; */
+}
+
+@media (min-width: 800px){
+    .cardContainer {
+        flex: 1;
+        flex-direction: row;
+    }
+}
+
+.link {
+    padding: 1rem;
+}
