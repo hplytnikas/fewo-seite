@@ -4,7 +4,7 @@ import styles from "./gallery.module.css";
 export default function Page() {
   return (
     <>
-      <Navigation wohnungUrl="kaefer" home={false}/>
+      <Navigation home={false} />
       <div className={styles.container}>
         <p> Gallery </p>
       </div>

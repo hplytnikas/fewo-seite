@@ -22,7 +22,6 @@ import { useParams } from "next/navigation";
 
 export default function Page() {
   const { wohnung } = useParams();
-
   dotenv.config();
   const { t } = useTranslation();
   // const { locale } = useLocale();
