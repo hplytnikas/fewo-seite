@@ -81,3 +81,7 @@
 .otherNav {
     color: black;
 }
+
+.homeNone {
+    display: none;
+}

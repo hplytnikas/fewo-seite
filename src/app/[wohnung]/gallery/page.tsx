@@ -1,0 +1,13 @@
+import Navigation from "@/app/components/navigation";
+import styles from "./gallery.module.css";
+
+export default function Page() {
+  return (
+    <>
+      <Navigation wohnungUrl="kaefer" home={false}/>
+      <div className={styles.container}>
+        <p> Gallery </p>
+      </div>
+    </>
+  );
+}

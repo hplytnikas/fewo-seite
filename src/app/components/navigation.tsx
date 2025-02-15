@@ -16,9 +16,16 @@ import {
 } from "@nextui-org/navbar";
 import { useEffect, useState } from "react";
 
-export default function Navigation() {
-  const isHome = usePathname() === "/";
-  console.log(isHome);
+interface NavigationProps {
+  home: boolean;
+}
+
+export default function Navigation( {home} : NavigationProps) {
+  const isHome = (usePathname() === "/" || home);
+  // console.log(isHome);
+  const wohnungUrl = usePathname().split("/")[1] || "";
+
+  //Object for translation
   const { t } = useTranslation();
 
   //check if device is mobile
@@ -67,7 +74,7 @@ export default function Navigation() {
           </NavbarContent>
           <NavbarContent>
             <NavbarItem className={styles.requestButton} onClick={() => setIsMenuOpen(false)}>
-              <Link href="/requestform">
+              <Link href={`/${wohnungUrl}/availability`}>
                 {t("request now")}
               </Link>
             </NavbarItem>
@@ -76,14 +83,15 @@ export default function Navigation() {
             <NavbarMenuItem className={`${styles.navButton} ${styles.menuNavButton} ${isHome ? '' : styles.otherNav}`}>
               <Link color="foreground" href="/" onClick={() => setIsMenuOpen(false)}>Home</Link>
             </NavbarMenuItem>
-            <NavbarMenuItem className={`${styles.navButton} ${styles.menuNavButton} ${isHome ? '' : styles.otherNav}`}>
-              <Link href="/availability" onClick={() => setIsMenuOpen(false)}>{t("availability")}</Link>
+            
+            <NavbarMenuItem className={` ${styles.navButton} ${styles.menuNavButton} ${isHome ? '' : styles.otherNav}`}>
+                <Link href={`/${wohnungUrl}/availability`} onClick={() => setIsMenuOpen(false)}>{t("availability")}</Link>
             </NavbarMenuItem>
             <NavbarMenuItem className={`${styles.navButton} ${styles.menuNavButton} ${isHome ? '' : styles.otherNav}`}>
-              <Link href="/gallery" onClick={() => setIsMenuOpen(false)}>{t("gallery")}</Link>
+              <Link href={`/${wohnungUrl}/gallery`} onClick={() => setIsMenuOpen(false)}>{t("gallery")}</Link>
             </NavbarMenuItem>
             <NavbarMenuItem className={`${styles.navButton} ${styles.menuNavButton} ${isHome ? '' : styles.otherNav}`}>
-              <Link href="/contact" onClick={() => setIsMenuOpen(false)}>{t("contact")}</Link>
+              <Link href={`/${wohnungUrl}/gallery`} onClick={() => setIsMenuOpen(false)}>{t("contact")}</Link>
             </NavbarMenuItem>
 
             <NavbarMenuItem>
@@ -107,22 +115,22 @@ export default function Navigation() {
             </NavbarBrand>
           </NavbarContent>
           <NavbarContent className={`${styles.mainContent}`} justify="end">
-            <NavbarItem className={styles.navButton}>
+            <NavbarItem className={`${isHome? styles.homeNone : ''} ${styles.navButton}`}>
               <Link color="foreground" href="/">
                 Home
               </Link>
             </NavbarItem>
-            <NavbarItem className={styles.navButton}>
-              <Link href="/availability">{t("availability")}</Link>
+            <NavbarItem className={`${isHome? styles.homeNone : ''} ${styles.navButton}`}>
+              <Link href={`/${wohnungUrl}/availability`}>{t("availability")}</Link>
             </NavbarItem>
-            <NavbarItem className={styles.navButton}>
-              <Link href="/gallery">{t("gallery")}</Link>
+            <NavbarItem className={`${isHome? styles.homeNone : ''} ${styles.navButton}`}>
+              <Link href={`/${wohnungUrl}/gallery`}>{t("gallery")}</Link>
             </NavbarItem>
-            <NavbarItem className={styles.navButton}>
-              <Link href="/contact">{t("contact")}</Link>
+            <NavbarItem className={`${isHome? styles.homeNone : ''} ${styles.navButton}`}>
+              <Link href={`/${wohnungUrl}/contact`}>{t("contact")}</Link>
             </NavbarItem>
-            <NavbarItem className={styles.requestButton}>
-              <Link href="/requestform">{t("request now")}</Link>
+            <NavbarItem className={`${isHome? styles.homeNone : ''} ${styles.requestButton}`}>
+              <Link href={`/${wohnungUrl}/requestform`}>{t("request now")}</Link>
             </NavbarItem>
           </NavbarContent>
         </Navbar>
