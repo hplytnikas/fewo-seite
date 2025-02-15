@@ -16,7 +16,7 @@ import { useEffect, useState } from "react";
 // import { sql } from '@vercel/postgres';
 import { neon } from '@neondatabase/serverless';
 import dotenv from 'dotenv';
-import {FetchDate} from "./fetching";
+import {FetchDate} from "@/app/lib/fetching";
 import Navigation from "@/app/components/navigation";
 import { useParams } from "next/navigation";
 

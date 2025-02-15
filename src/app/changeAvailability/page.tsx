@@ -16,7 +16,8 @@ import { Key, useEffect, useState } from "react";
 // import { sql } from '@vercel/postgres';
 import { neon } from "@neondatabase/serverless";
 import dotenv from "dotenv";
-import { FetchDate, addDate, deleteDate } from "@/app/kaefer/availability/fetching";
+import { FetchDate, addDate, deleteDate } from "@/app/lib/fetching";
+
 import { DateRangePicker } from "@nextui-org/date-picker";
 import { Select, SelectSection, SelectItem } from "@nextui-org/select";
 import { format, toZonedTime } from "date-fns-tz";
