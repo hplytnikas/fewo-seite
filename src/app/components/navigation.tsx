@@ -64,7 +64,8 @@ export default function Navigation( {home} : NavigationProps) {
           position="sticky"
           onMenuOpenChange={setIsMenuOpen}
           isMenuOpen={isMenuOpen}
-          // isBlurred={false}
+          isBlurred={false}
+          
         >
           <NavbarContent>
             <NavbarMenuToggle
