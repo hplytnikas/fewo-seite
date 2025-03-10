@@ -12,15 +12,13 @@ import {
   CalendarDate,
   parseDate
 } from "@internationalized/date";
-// import { DateValue } from "@react-types/calendar";
-// import { DateValue } from "@react-types/calendar";
-// import { useLocale } from "@react-aria/i18n";
 import { useEffect, useState } from "react";
 // import { sql } from '@vercel/postgres';
 import { neon } from '@neondatabase/serverless';
 import dotenv from 'dotenv';
 import Navigation from "@/app/components/navigation";
 import { useParams } from "next/navigation";
+import { useDisabledRanges } from "@/app/context/disabledrangescontext";
 
 export default function Page() {
   const { wohnung } = useParams();
@@ -28,7 +26,8 @@ export default function Page() {
   const { t } = useTranslation();
   // const { locale } = useLocale();
   const [now, setNow] = useState<DateValue | null>(null);
-  const [disabledRanges, setDisabledRanges] = useState<[DateValue, DateValue][]>([]);
+  // const [disabledRanges, setDisabledRanges] = useState<[DateValue, DateValue][]>([]);
+  const { disabledRanges, setDisabledRanges } = useDisabledRanges();
 
   console.log("Disabled Ranges: ", disabledRanges);
 
@@ -36,7 +35,7 @@ export default function Page() {
     const fetchData = async () => {
       setNow(today(getLocalTimeZone()));
 
-      const result = await FetchDate() as { start_date: string, end_date: string }[];
+      const result = await FetchDate(wohnung as string) as { start_date: string, end_date: string }[];
       const fetchedRanges = result.map((row) => {
         // console.log("Type: ", new Date(Date.parse(row.start_date)).toISOString().split('T')[0]);
 

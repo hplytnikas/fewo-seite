@@ -4,6 +4,7 @@ import "./globals.css";
 import Navigation from "./components/navigation";
 import { Providers } from "./components/providers";
 import dotenv from 'dotenv';
+import { DisabledRangesProvider } from "./context/disabledrangescontext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,6 +29,7 @@ export default function RootLayout({
 }>) {
   
   // console.log(`Test: ${process.env.DATABASE_URL}`);
+  
 
   return (
     <html lang="en">
@@ -36,10 +38,12 @@ export default function RootLayout({
         >
           {/* <Navigation /> */}
           {/* {children} */}
-          <Providers> 
-            {/* <Navigation /> */}
-            {children}
-          </Providers>
+          <DisabledRangesProvider>
+            <Providers> 
+              {/* <Navigation /> */}
+              {children}
+            </Providers>
+          </DisabledRangesProvider>
         </body>
     </html>
   );

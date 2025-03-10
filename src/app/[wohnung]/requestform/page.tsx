@@ -5,11 +5,13 @@ import styles from "./requestform.module.css";
 import { useParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { Form } from "@heroui/form";
-import { Input, Button, NumberInput } from "@heroui/react";
-import { useState } from "react";
+import { Input, Button, NumberInput, Textarea } from "@heroui/react";
+import { useEffect, useState } from "react";
 import { DateRangePicker } from "@heroui/date-picker";
 import { RadioGroup, Radio } from "@heroui/radio";
-
+import { useDisabledRanges } from "@/app/context/disabledrangescontext";
+import { DateValue, getLocalTimeZone, parseDate, today } from "@internationalized/date";
+import { FetchDate } from "@/app/lib/fetching";
 
 export default function Page() {
   //logic to check which wohnung it is - automatically knows which one it is
@@ -20,15 +22,35 @@ export default function Page() {
   } | null>(null);
   const [action, setAction] = useState<string | null>(null);
   const [selected, setSelected] = useState("No");
+  const { disabledRanges, setDisabledRanges } = useDisabledRanges();
+  const [now, setNow] = useState<DateValue | null>(null);
+
+  useEffect(() => {
+      const fetchData = async () => {
+        setNow(today(getLocalTimeZone()));
   
+        const result = await FetchDate(wohnung as string) as { start_date: string, end_date: string }[];
+        const fetchedRanges = result.map((row) => {
+          // console.log("Type: ", new Date(Date.parse(row.start_date)).toISOString().split('T')[0]);
+  
+          const startDate = parseDate(new Date(Date.parse(row.start_date)).toISOString().split('T')[0]);
+          const endDate = parseDate(new Date(Date.parse(row.end_date)).toISOString().split('T')[0]);
+          console.log("Start Date: ", startDate);
+          console.log("End Date: ", endDate);
+          return [startDate, endDate] as [DateValue, DateValue];
+        });
+        setDisabledRanges(fetchedRanges);
+      };
+      fetchData();
+    }, []);
 
-  //   const onSubmit = (e) => {
-  //     e.preventDefault();
 
-  //     const data = Object.fromEntries(new FormData(e.currentTarget));
-
-  //     setSubmitted(data);
-  //   };
+  const isDateUnavailable = (date: DateValue) => {
+      const intlDate = parseDate(date.toString()); // Convert ReactDateValue to IntlDateValue
+      return disabledRanges.some(
+        (interval) => intlDate.compare(interval[0]) >= 0 && intlDate.compare(interval[1]) <= 0
+      );
+    };
 
   return (
     <>
@@ -37,7 +59,7 @@ export default function Page() {
         <h1 className={styles.heading}> {t("request form")} </h1>
         <div className={styles.form}>
           <Form
-            className="w-full max-w-xs flex flex-col gap-4"
+            className="w-full max-w-xs flex flex-col gap-3"
             onReset={() => setAction("reset")}
             onSubmit={(e) => {
               e.preventDefault();
@@ -48,90 +70,80 @@ export default function Page() {
             <Input
               isRequired
               errorMessage="Please enter a valid name"
-              label="Name"
+              label={t("name")}
               labelPlacement="outside"
               name="name"
-              placeholder="Enter your name"
+              placeholder={t("enter your name")}
               type="text"
               className={styles.input}
             />
             <Input
               isRequired
               errorMessage="Please enter a valid lastname"
-              label="Lastname"
+              label={t("surname")}
               labelPlacement="outside"
               name="lastname"
-              placeholder="Enter your lastname"
+              placeholder={t("enter your surname")}
               type="text"
             />
             <Input
               isRequired
               errorMessage="Please enter a valid email"
-              label="Email"
+              label={t("email")}
               labelPlacement="outside"
               name="email"
-              placeholder="Enter your email"
+              placeholder={t("enter your email")}
               type="email"
             />
             <DateRangePicker
               isRequired
               className="max-w-xs"
-              label="Stay duration"
+              label={t("stay duration")}
               labelPlacement="outside"
+              isDateUnavailable={isDateUnavailable}
             />
-            {/* <div>
-              <label> Dauer: </label>
-              <input type="text" id="dauer" name="dauer" required />
-            </div> */}
-
-            {/* <div>
-              <label> Number of People: </label>
-              <input type="number" id="people" name="people" required />
-            </div> */}
-            {/* <div>
-              <label> Pet: </label>
-              <input type="text" id="pet" name="pet" required />
-            </div> */}
             <NumberInput
               isRequired
               errorMessage="Please enter a valid number"
-              label="Number of people"
+              label={t("number of guests")}
               labelPlacement="outside"
               name="people"
-              placeholder="Enter number of people"
+              placeholder={t("enter number of guests")}
               minValue={1}
+              maxValue={wohnung === "villaforyou" ? 7 : 10}
             />
 
-            <label className={styles.radioLabel}> Do you have pets?</label>
+            <label className={styles.radioLabel}>{t("do you have pets")}</label>
             <RadioGroup
-            //   className={styles.radioLabel}
+              //   className={styles.radioLabel}
               label=""
               name="pets"
               orientation="horizontal"
               size="sm"
               // color="danger"
-              value={selected} 
+              value={selected}
               onValueChange={setSelected}
             >
-              <Radio value="Yes">Yes</Radio>
-              <Radio value="No">No</Radio>
+              <Radio value="Yes">{t("yes")}</Radio>
+              <Radio value="No">{t("no")}</Radio>
             </RadioGroup>
             {selected === "Yes" && (
               <Input
-                label="What pet do you have?"
+                label={t("what pets do you have")}
                 labelPlacement="outside"
                 name="pet-list"
-                placeholder="List you pets"
+                placeholder={t("list your pets")}
                 type="text"
               />
             )}
-            <Input
-              label="Message"
+            <Textarea
+              label={t("message")}
               labelPlacement="outside"
               name="message"
-              placeholder="Enter your message"
+              placeholder={t("enter message")}
               type="text"
-              size="md"
+
+              // className={styles.message}
             />
 
             <div className="flex gap-2">

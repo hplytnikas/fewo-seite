@@ -21,8 +21,11 @@ import { FetchDate, addDate, deleteDate } from "@/app/lib/fetching";
 import { DateRangePicker } from "@heroui/date-picker";
 import { Select, SelectSection, SelectItem } from "@heroui/select";
 import { format, toZonedTime } from "date-fns-tz";
+import { useParams } from "next/navigation";
 
 export default function Page() {
+  const { wohnung } = useParams();
+
   dotenv.config();
   const { t } = useTranslation();
   const { locale } = useLocale();
@@ -37,41 +40,27 @@ export default function Page() {
   const [deleteValue, setDeleteValue] = useState<[DateValue, DateValue] | null>(
     null
   );
+  const [now, setNow] = useState<DateValue | null>(null);
 
   //fetch data from database
   useEffect(() => {
-    console.log("Local Time Zone: ", getLocalTimeZone());
-    // setNow(today(getLocalTimeZone()));
-
     const fetchData = async () => {
-      const result = (await FetchDate()) as {
-        start_date: string;
-        end_date: string;
-      }[];
-      const fetchedRanges = result.map((row) => {
-        //long ass conversion from postgresql to javascript date
-        const startDate = parseDate(
-          new Date(Date.parse(row.start_date)).toISOString().split("T")[0]
-        );
-        console.log("Fetched Start date ", startDate); //correct
+      setNow(today(getLocalTimeZone()));
 
-        const endDate = parseDate(
-          new Date(Date.parse(row.end_date)).toISOString().split("T")[0]
-        );
-        // console.log("Start Date: ", startDate);
-        // console.log("End Date: ", endDate);
+      const result = await FetchDate(wohnung as string) as { start_date: string, end_date: string }[];
+      const fetchedRanges = result.map((row) => {
+        // console.log("Type: ", new Date(Date.parse(row.start_date)).toISOString().split('T')[0]);
+
+        const startDate = parseDate(new Date(Date.parse(row.start_date)).toISOString().split('T')[0]);
+        const endDate = parseDate(new Date(Date.parse(row.end_date)).toISOString().split('T')[0]);
+        console.log("Start Date: ", startDate);
+        console.log("End Date: ", endDate);
         return [startDate, endDate] as [DateValue, DateValue];
       });
       setDisabledRanges(fetchedRanges);
-      console.log(fetchedRanges);
     };
     fetchData();
   }, []);
-
-  //   if (!now) {
-  //     // Render a loading state or nothing until the client-side data is available
-  //     return null;
-  //   }
 
   const isDateUnavailable = (date: DateValue) =>
     disabledRanges.some(
@@ -88,7 +77,8 @@ export default function Page() {
       //   console.log("End Input: ", range.end.toDate(getLocalTimeZone()));
       addDate(
         range.start.toDate(getLocalTimeZone()).toISOString(),
-        range.end.toDate(getLocalTimeZone()).toISOString()
+        range.end.toDate(getLocalTimeZone()).toISOString(),
+        wohnung as string
       );
     }
   };
@@ -121,7 +111,7 @@ export default function Page() {
               )
           )
         );
-        deleteDate(start, end);
+        deleteDate(start, end, wohnung as string);
       });
       // setDeleteValue(selectedRanges);
     } else {
@@ -132,7 +122,7 @@ export default function Page() {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Admin Zugriff</h1>
+      <h1 className={styles.title}>Admin Zugriff: {wohnung} </h1>
       <Calendar
         aria-label="Date (Unavailable)"
         isDateUnavailable={isDateUnavailable}

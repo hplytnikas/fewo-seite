@@ -4,20 +4,13 @@ import Homepage from "./components/homepage";
 import OtherComponent from "./components/other";
 import Navigation from "./components/navigation";
 
+import { DateValue } from "@internationalized/date";
+
 export default function Home() {
+  // const [disabledRanges, setDisabledRanges] = useState<[DateValue, DateValue][]>([]);
+  
   return (
     <div className="flex flex-col items-center justify-center ">
-      {/* <h1>Home</h1>
-      <Image
-        src="/vercel.svg"
-        alt="Vercel Logo"
-        width={72}
-        height={16}
-      />
-
-      <Link href="/checkout">
-        Checkout
-      </Link> */}
       <Homepage />
       {/* <OtherComponent /> */}
     </div>
