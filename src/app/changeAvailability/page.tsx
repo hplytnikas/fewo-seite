@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./changeAvailability.module.css";
-import { Calendar, RangeValue } from "@nextui-org/calendar";
+import { Calendar, RangeValue } from "@heroui/calendar";
 import { useTranslation } from "react-i18next";
 import {
   today,
@@ -18,8 +18,8 @@ import { neon } from "@neondatabase/serverless";
 import dotenv from "dotenv";
 import { FetchDate, addDate, deleteDate } from "@/app/lib/fetching";
 
-import { DateRangePicker } from "@nextui-org/date-picker";
-import { Select, SelectSection, SelectItem } from "@nextui-org/select";
+import { DateRangePicker } from "@heroui/date-picker";
+import { Select, SelectSection, SelectItem } from "@heroui/select";
 import { format, toZonedTime } from "date-fns-tz";
 
 export default function Page() {

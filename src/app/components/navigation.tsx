@@ -13,7 +13,7 @@ import {
   NavbarMenuToggle,
   NavbarMenu,
   NavbarMenuItem,
-} from "@nextui-org/navbar";
+} from "@heroui/navbar";
 import { useEffect, useState } from "react";
 
 interface NavigationProps {

@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./availability.module.css";
-import { Calendar } from "@nextui-org/calendar";
+import { Calendar } from "@heroui/calendar";
 import { useTranslation } from "react-i18next";
 import {
   today,

@@ -1,4 +1,29 @@
 .container {
     /* margin-top: var(--navHeight); */
-    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.heading {
+    padding: 1rem;
+    font-size: x-large;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.radioLabel {
+    font-size: 0.9rem;
+    /* color: black; */
+    color: red;
+}
+
+.input {
+    width: 16rem;
 }

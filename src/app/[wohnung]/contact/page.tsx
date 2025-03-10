@@ -14,8 +14,11 @@ export default function Page() {
       <div className={styles.container}>
         <h1 className={styles.title}> {t("contact title")}</h1>
         {/* <p> Contact of {wohnung}</p> */}
+        <p> Name: </p>
         <p> Tel: </p>
         <p> Email: </p>
+        <p> Addresse: </p>
+        <p> Google maps rein</p>
       </div>
     </>
   );
