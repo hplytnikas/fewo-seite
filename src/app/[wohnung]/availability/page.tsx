@@ -1,22 +1,23 @@
 "use client";
 
-import styles from "./availability.module.css";
 import { Calendar } from "@heroui/calendar";
+import styles from "./availability.module.css";
+import {FetchDate} from "@/app/lib/fetching";
 import { useTranslation } from "react-i18next";
 import {
   today,
   getLocalTimeZone,
   isWeekend,
-  DateValue,
   CalendarDate,
+  DateValue,
   parseDate
 } from "@internationalized/date";
+// import { DateValue } from "@react-types/calendar";
 // import { useLocale } from "@react-aria/i18n";
 import { useEffect, useState } from "react";
 // import { sql } from '@vercel/postgres';
 import { neon } from '@neondatabase/serverless';
 import dotenv from 'dotenv';
-import {FetchDate} from "@/app/lib/fetching";
 import Navigation from "@/app/components/navigation";
 import { useParams } from "next/navigation";
 
@@ -60,12 +61,12 @@ export default function Page() {
   //   [now.add({ days: 23 }), now.add({ days: 24 })],
   // ];
 
-  const isDateUnavailable = (date: DateValue) =>
-    // isWeekend(date, locale) ||
-    disabledRanges.some(
-      (interval) =>
-        date.compare(interval[0]) >= 0 && date.compare(interval[1]) <= 0
+  const isDateUnavailable = (date: { toString: () => string; }) => {
+    const intlDate = parseDate(date.toString()); // Convert ReactDateValue to IntlDateValue
+    return disabledRanges.some(
+      (interval) => intlDate.compare(interval[0]) >= 0 && intlDate.compare(interval[1]) <= 0
     );
+  };
 
   return (
     <>

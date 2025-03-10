@@ -23,6 +23,9 @@ importers:
       '@heroui/navbar':
         specifier: 2.2.14
         version: 2.2.14(@heroui/system@2.4.12(@heroui/theme@2.4.12(tailwindcss@3.4.17(ts-node@10.9.1(@types/node@20.17.10)(typescript@5.7.2))))(framer-motion@11.16.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(@heroui/theme@2.4.12(tailwindcss@3.4.17(ts-node@10.9.1(@types/node@20.17.10)(typescript@5.7.2))))(framer-motion@11.16.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      '@heroui/number-input':
+        specifier: ^2.0.6
+        version: 2.0.6(@heroui/system@2.4.12(@heroui/theme@2.4.12(tailwindcss@3.4.17(ts-node@10.9.1(@types/node@20.17.10)(typescript@5.7.2))))(framer-motion@11.16.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(@heroui/theme@2.4.12(tailwindcss@3.4.17(ts-node@10.9.1(@types/node@20.17.10)(typescript@5.7.2))))(framer-motion@11.16.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@heroui/radio':
         specifier: ^2.3.15
         version: 2.3.15(@heroui/system@2.4.12(@heroui/theme@2.4.12(tailwindcss@3.4.17(ts-node@10.9.1(@types/node@20.17.10)(typescript@5.7.2))))(framer-motion@11.16.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(@heroui/theme@2.4.12(tailwindcss@3.4.17(ts-node@10.9.1(@types/node@20.17.10)(typescript@5.7.2))))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -47,6 +50,9 @@ importers:
       '@react-aria/i18n':
         specifier: ^3.12.4
         version: 3.12.4(react@19.0.0)
+      '@react-types/shared':
+        specifier: ^3.28.0
+        version: 3.28.0(react@19.0.0)
       '@vercel/postgres':
         specifier: ^0.10.0
         version: 0.10.0
@@ -1355,11 +1361,6 @@ packages:
 
   '@react-types/select@3.9.10':
     resolution: {integrity: sha512-vvC5+cBSOu6J6lm74jhhP3Zvo1JO8m0FNX+Q95wapxrhs2aYYeMIgVuvNKeOuhVqzpBZxWmblBjCVNzCArZOaQ==}
-    peerDependencies:
-      react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
-
-  '@react-types/shared@3.26.0':
-    resolution: {integrity: sha512-6FuPqvhmjjlpEDLTiYx29IJCbCNWPlsyO+ZUmCUXzhUv2ttShOXfw8CmeHWHftT/b2KweAWuzqSlfeXPR76jpw==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1
 
@@ -4436,7 +4437,7 @@ snapshots:
       '@internationalized/string': 3.2.5
       '@react-aria/ssr': 3.9.7(react@19.0.0)
       '@react-aria/utils': 3.26.0(react@19.0.0)
-      '@react-types/shared': 3.26.0(react@19.0.0)
+      '@react-types/shared': 3.28.0(react@19.0.0)
       '@swc/helpers': 0.5.15
       react: 19.0.0
 
@@ -5052,10 +5053,6 @@ snapshots:
   '@react-types/select@3.9.10(react@19.0.0)':
     dependencies:
       '@react-types/shared': 3.28.0(react@19.0.0)
-      react: 19.0.0
-
-  '@react-types/shared@3.26.0(react@19.0.0)':
-    dependencies:
       react: 19.0.0
 
   '@react-types/shared@3.28.0(react@19.0.0)':

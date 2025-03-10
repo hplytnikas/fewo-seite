@@ -5,7 +5,7 @@ import styles from "./requestform.module.css";
 import { useParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { Form } from "@heroui/form";
-import { Input, Button } from "@heroui/react";
+import { Input, Button, NumberInput } from "@heroui/react";
 import { useState } from "react";
 import { DateRangePicker } from "@heroui/date-picker";
 import { RadioGroup, Radio } from "@heroui/radio";
@@ -92,14 +92,24 @@ export default function Page() {
               <label> Pet: </label>
               <input type="text" id="pet" name="pet" required />
             </div> */}
+            <NumberInput
+              isRequired
+              errorMessage="Please enter a valid number"
+              label="Number of people"
+              labelPlacement="outside"
+              name="people"
+              placeholder="Enter number of people"
+              minValue={1}
+            />
 
+            <label className={styles.radioLabel}> Do you have pets?</label>
             <RadioGroup
             //   className={styles.radioLabel}
               label=""
               name="pets"
               orientation="horizontal"
               size="sm"
-              color="danger"
+              // color="danger"
               value={selected} 
               onValueChange={setSelected}
             >
@@ -115,6 +125,14 @@ export default function Page() {
                 type="text"
               />
             )}
+            <Input
+              label="Message"
+              labelPlacement="outside"
+              name="message"
+              placeholder="Enter your message"
+              type="text"
+              size="md"
+            />
 
             <div className="flex gap-2">
               <Button color="primary" type="submit">
