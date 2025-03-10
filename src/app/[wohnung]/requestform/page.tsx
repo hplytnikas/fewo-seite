@@ -148,10 +148,10 @@ export default function Page() {
 
             <div className="flex gap-2">
               <Button color="primary" type="submit">
-                Submit
+                {t("submit")}
               </Button>
               <Button type="reset" variant="flat">
-                Reset
+                {t("reset")}
               </Button>
             </div>
             {action && (

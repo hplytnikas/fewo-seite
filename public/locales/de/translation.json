@@ -24,5 +24,8 @@
     "message": "Nachricht",
     "enter message": "Haben Sie fragen?",
     "submit": "Absenden",
-    "reset": "Zurücksetzen"
+    "reset": "Zurücksetzen",
+    "check the price": "Preis prüfen",
+    "select dates": "Wählen Sie das Datum",
+    "total price": "Gesamtpreis"
 }

@@ -24,5 +24,8 @@
     "message": "Message",
     "enter message": "Do you have any questions?",
     "submit": "Absenden",
-    "reset": "Zurücksetzen"
+    "reset": "Zurücksetzen",
+    "check the price": "Check the price",
+    "select dates": "Select dates",
+    "total price": "Total price"
 }
