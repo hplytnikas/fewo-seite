@@ -8,10 +8,11 @@ import {
   today,
   getLocalTimeZone,
   isWeekend,
-  CalendarDate,
   DateValue,
+  CalendarDate,
   parseDate
 } from "@internationalized/date";
+// import { DateValue } from "@react-types/calendar";
 // import { DateValue } from "@react-types/calendar";
 // import { useLocale } from "@react-aria/i18n";
 import { useEffect, useState } from "react";
@@ -61,12 +62,17 @@ export default function Page() {
   //   [now.add({ days: 23 }), now.add({ days: 24 })],
   // ];
 
-  const isDateUnavailable = (date: { toString: () => string; }) => {
+  const isDateUnavailable = (date: DateValue) => {
     const intlDate = parseDate(date.toString()); // Convert ReactDateValue to IntlDateValue
     return disabledRanges.some(
       (interval) => intlDate.compare(interval[0]) >= 0 && intlDate.compare(interval[1]) <= 0
     );
   };
+  // const isDateUnavailable = (date: CalendarDate) => {
+  //   return disabledRanges.some(
+  //     ([start, end]) => date.compare(start) >= 0 && date.compare(end) <= 0
+  //   );
+  // };
 
   return (
     <>
@@ -78,7 +84,6 @@ export default function Page() {
         aria-label="Date (Unavailable)"
         isDateUnavailable={isDateUnavailable}
       />
-
     </div>
     </>    
   );

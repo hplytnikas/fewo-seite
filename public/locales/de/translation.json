@@ -6,5 +6,16 @@
     "availability title": "Verfügbarkeit",
     "welcome": "Willkommen!",
     "contact title": "Kontaktieren Sie uns!",
-    "request form": "Anfrageformular"
+    "request form": "Anfrageformular",
+    "name": "Vorname",
+    "surname": "Nachname",
+    "stay duration": "Aufenthaltsdauer",
+    "number of guests": "Anzahl der Gäste",
+    "do you have pets": "Haben Sie Haustiere?",
+    "yes": "Ja",
+    "no": "Nein",
+    "message": "Nachricht",
+    "enter message": "Geben Sie hier Ihre Nachricht ein",
+    "submit": "Absenden",
+    "reset": "Zurücksetzen"
 }
