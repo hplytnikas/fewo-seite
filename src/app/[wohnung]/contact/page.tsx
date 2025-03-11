@@ -14,6 +14,9 @@ import {
 export default function Page() {
   const { t } = useTranslation();
   // console.log("key: " + process.env.GOOGLE_API as string);
+  const { wohnung } = useParams();
+  const addr = wohnung === "linde" ? "Kefergasse 8, 1140 Wien" : "Schrutkagasse 22, 1130 Wien";
+  const addrCoords = wohnung === "linde" ? { lat: 48.19485100446728, lng: 16.278777968050015 } : { lat: 48.18312662439454, lng: 16.27837281349389 };
 
   return (
     <>
@@ -25,7 +28,7 @@ export default function Page() {
           <p> Name: Claudia Schäfer</p>
           <p> {t("phone")}: +43 617 89928 (fake)</p>
           <p> {t("email")}: fewo@gmail.com</p>
-          <p> {t("address")}: Kefergasse 8, 1140 Wien </p>
+          <p> {t("address")}: {addr} </p>
         </div>
 
         <APIProvider
@@ -39,8 +42,8 @@ export default function Page() {
               
               defaultZoom={16}
               defaultCenter={{
-                lat: 48.19485100446728,
-                lng: 16.278777968050015,
+                lat: addrCoords.lat,
+                lng: addrCoords.lng,
               }}
               onCameraChanged={(ev: MapCameraChangedEvent) =>
                 console.log(
@@ -52,7 +55,7 @@ export default function Page() {
               }
             >
               <Marker
-                position={{ lat: 48.19485100446728, lng: 16.278777968050015 }}
+                position={{ lat: addrCoords.lat, lng: addrCoords.lng }}
               />
             </Map>
           </div>
