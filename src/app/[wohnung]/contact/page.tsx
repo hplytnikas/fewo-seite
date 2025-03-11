@@ -25,7 +25,7 @@ export default function Page() {
         {/* <p> Contact of {wohnung}</p> */}
         <div className={styles.contact}>
         <h1 className={styles.title}> {t("contact title")}</h1>
-          <p> Name: Klaudia Schäfer</p>
+          <p> Name: Klaudia Schäfer-Wais</p>
           <p> {t("phone")}: +43 650 2176406</p>
           <p> {t("email")}: fewo@gmail.com (fake) </p>
           <p> {t("address")}: {addr} </p>
