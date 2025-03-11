@@ -28,7 +28,7 @@ export default function Page() {
         </div>
 
         <APIProvider
-          apiKey={"AIzaSyD6l-5_KdHbA_qooSj7qsMiwCS0WQdzV90"} //{process.env.GOOGLE_API as string}
+          apiKey={process.env.GOOGLE_API as string} //{process.env.GOOGLE_API as string}
           onLoad={() => console.log("Maps API has loaded.")}
         >
           <div className={styles.map}>
