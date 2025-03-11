@@ -7,7 +7,6 @@ import Navigation from "./components/navigation";
 import { DateValue } from "@internationalized/date";
 
 export default function Home() {
-  // const [disabledRanges, setDisabledRanges] = useState<[DateValue, DateValue][]>([]);
   
   return (
     <div className="flex flex-col items-center justify-center ">
