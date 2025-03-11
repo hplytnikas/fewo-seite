@@ -11,7 +11,12 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center ">
       <Homepage />
-      {/* <OtherComponent /> */}
     </div>
   );
+}
+
+//changing the title of the page
+export const metadata = {
+  title: "Fewo Seite",
+  // description: "My description",
 }
