@@ -27,5 +27,7 @@
     "reset": "Zurücksetzen",
     "check the price": "Check the price",
     "select dates": "Select dates",
-    "total price": "Total price"
+    "total price": "Total price",
+    "phone": "Phone",
+    "address": "Address"
 }

@@ -9,6 +9,22 @@
 }
 
 .title {
-    padding: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
     font-size: x-large;
+}
+
+.map {
+    width: 20rem;
+    height: 20rem;
+    padding: 1rem;
+}
+
+.contact {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* align-items: center; */
+    padding-top: 1rem;
+    gap: 0.3rem;
 }
