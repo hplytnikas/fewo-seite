@@ -12,6 +12,7 @@ import { RadioGroup, Radio } from "@heroui/radio";
 import { useDisabledRanges } from "@/app/context/disabledrangescontext";
 import { DateValue, getLocalTimeZone, parseDate, today } from "@internationalized/date";
 import { FetchDate } from "@/app/lib/fetching";
+import { POST } from "@/app/api/send-email/route";
 
 export default function Page() {
   //logic to check which wohnung it is - automatically knows which one it is
@@ -52,6 +53,36 @@ export default function Page() {
       );
     };
 
+  const handleSubmit = async (jsondata: { [k: string]: FormDataEntryValue; }) => {
+    const data = {
+      email: jsondata.email as string,
+      lastname: jsondata.lastname as string,
+      message: jsondata.message as string || "",
+      name: jsondata.name as string,
+      people: parseInt(jsondata.people as string),
+      petList: jsondata["pet-list"] as string || "",
+      pets: jsondata.pets as string,
+    };
+    // console.log("Data Type: ", typeof JSON.stringify(data));
+    
+    try {
+      const res = await fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+        // const data = await res.json();
+      // if (!res.ok) throw new Error(data.error || "Failed to send email");
+
+      // setResponse("Email sent successfully!");
+      });
+    } catch (error) {
+      // setResponse(error.message);
+      console.error("Error: ", error);
+    }
+  };
+
   return (
     <>
       <Navigation home={false} />
@@ -64,7 +95,9 @@ export default function Page() {
             onSubmit={(e) => {
               e.preventDefault();
               let data = Object.fromEntries(new FormData(e.currentTarget));
+              console.log("Data: ", data);
               setAction(`submit ${JSON.stringify(data)}`);
+              handleSubmit(data);
             }}
           >
             <Input
