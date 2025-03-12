@@ -5,7 +5,7 @@ import styles from "./requestform.module.css";
 import { useParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { Form } from "@heroui/form";
-import { Input, Button, NumberInput, Textarea } from "@heroui/react";
+import { Input, Button, NumberInput, Textarea, RangeValue } from "@heroui/react";
 import { useEffect, useState } from "react";
 import { DateRangePicker } from "@heroui/date-picker";
 import { RadioGroup, Radio } from "@heroui/radio";
@@ -25,6 +25,11 @@ export default function Page() {
   const [selected, setSelected] = useState("No");
   const { disabledRanges, setDisabledRanges } = useDisabledRanges();
   const [now, setNow] = useState<DateValue | null>(null);
+  const [value, setValue] = useState<{ start: DateValue; end: DateValue }>({
+    start: today(getLocalTimeZone()),
+    end: today(getLocalTimeZone()),
+  });
+  const [stringDateRange, setStringDateRange] = useState<string[] | null>(null);
 
   useEffect(() => {
       const fetchData = async () => {
@@ -62,6 +67,8 @@ export default function Page() {
       people: parseInt(jsondata.people as string),
       petList: jsondata["pet-list"] as string || "",
       pets: jsondata.pets as string,
+      startDate: jsondata.startDate as string,
+      endDate: jsondata.endDate as string,
     };
     // console.log("Data Type: ", typeof JSON.stringify(data));
     
@@ -83,6 +90,15 @@ export default function Page() {
     }
   };
 
+  const processInputDate = (range: RangeValue<DateValue> | null) => {
+      if (range && range.start && range.end) {
+        setValue({ start: range.start, end: range.end });
+        setStringDateRange([range.start.toString(), range.end.toString()]);
+        console.log("Value: ", value);
+        console.log("String Date Range: ", stringDateRange);
+      }
+    };
+
   return (
     <>
       <Navigation home={false} />
@@ -95,6 +111,14 @@ export default function Page() {
             onSubmit={(e) => {
               e.preventDefault();
               let data = Object.fromEntries(new FormData(e.currentTarget));
+             
+              const formatDate = (date: string) => {
+                const [year, month, day] = date.split("-");
+                return `${day}.${month}.${year}` as string;
+              };
+
+              data.startDate = stringDateRange ? formatDate(stringDateRange[0]) : "no date";
+              data.endDate = stringDateRange ? formatDate(stringDateRange[1]) : "no date";
               console.log("Data: ", data);
               setAction(`submit ${JSON.stringify(data)}`);
               handleSubmit(data);
@@ -134,6 +158,8 @@ export default function Page() {
               label={t("stay duration")}
               labelPlacement="outside"
               isDateUnavailable={isDateUnavailable}
+              // value={value}
+              onChange={processInputDate}
             />
             <NumberInput
               isRequired

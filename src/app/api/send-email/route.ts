@@ -11,12 +11,18 @@ export async function POST(req: Request) {
 
     const { email, lastname, message, name, people, petList, pets } = body;
 
+    const startDate = body?.startDate || body["startDate"];
+    const endDate = body?.endDate || body["endDate"];
+
+    console.log("Start Date: ", startDate);
+    console.log("End Date: ", endDate);
+
     const { data, error } = await resend.emails.send({
       from: "Acme <onboarding@resend.dev>",
       to: ["h.plytnikas@gmail.com"],
       subject: "Neue Anfrage",
       react: await EmailTemplate({
-        email, lastname, message, name, people, petList, pets,
+        email, lastname, message, name, people, petList, pets, startDate, endDate
       }),
     });
 

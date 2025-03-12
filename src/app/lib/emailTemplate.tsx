@@ -8,6 +8,8 @@ interface EmailTemplateProps {
   people: number;
   petList: string;
   pets: string;
+  startDate: string;
+  endDate: string;
 }
 
 export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
@@ -18,6 +20,8 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
   people,
   petList,
   pets,
+  startDate,
+  endDate,
 }) => (
   <div>
     <h1>Neue Anfrage</h1>
@@ -25,6 +29,8 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
     <p>Nachname: {lastname}</p>
     <p>Email: {email}</p>
     <p>Anzahl Gäste: {people}</p>
+    <p>Startdatum: {startDate}</p>
+    <p>Enddatum: {endDate}</p>
     <p>Haustiere: {pets}</p>
     <p>Liste der Haustiere: {petList}</p>
     <p>Nachricht: {message}</p>
