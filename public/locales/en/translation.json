@@ -23,11 +23,13 @@
     "no": "No",
     "message": "Message",
     "enter message": "Do you have any questions?",
-    "submit": "Absenden",
-    "reset": "Zurücksetzen",
+    "submit": "Submit",
+    "reset": "Reset",
     "check the price": "Check the price",
     "select dates": "Select dates",
     "total price": "Total price",
     "phone": "Phone",
-    "address": "Address"
+    "address": "Address",
+    "reset form": "Form has been reset",
+    "request submitted": "Request has been submitted successfully"
 }

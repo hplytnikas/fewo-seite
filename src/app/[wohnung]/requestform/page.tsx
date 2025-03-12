@@ -60,6 +60,7 @@ export default function Page() {
 
   const handleSubmit = async (jsondata: { [k: string]: FormDataEntryValue; }) => {
     const data = {
+      wohnung: wohnung === "villaforyou" ? "Villa For You" : "Unter der Linde",
       email: jsondata.email as string,
       lastname: jsondata.lastname as string,
       message: jsondata.message as string || "",
@@ -175,6 +176,7 @@ export default function Page() {
             <label className={styles.radioLabel}>{t("do you have pets")}</label>
             <RadioGroup
               //   className={styles.radioLabel}
+              isRequired
               label=""
               name="pets"
               orientation="horizontal"
@@ -215,7 +217,7 @@ export default function Page() {
             </div>
             {action && (
               <div className="text-small text-default-500">
-                Action: <code>{action}</code>
+                {action === "reset" ? t("reset form") : t("request submitted")}
               </div>
             )}
           </Form>

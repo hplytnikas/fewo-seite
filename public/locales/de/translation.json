@@ -29,5 +29,7 @@
     "select dates": "Wählen Sie das Datum",
     "total price": "Gesamtpreis",
     "phone": "Tel",
-    "address": "Adresse"
+    "address": "Adresse",
+    "reset form": "Formular wurde zurückgesetzt",
+    "request submitted": "Anfrage wurde erfolgreich gesendet"
 }

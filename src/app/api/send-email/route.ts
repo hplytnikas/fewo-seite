@@ -9,20 +9,17 @@ export async function POST(req: Request) {
     const body = await req.json();
     console.log("Received request body:", body); // Debugging
 
-    const { email, lastname, message, name, people, petList, pets } = body;
+    const { email, lastname, message, name, people, petList, pets, wohnung } = body;
 
     const startDate = body?.startDate || body["startDate"];
     const endDate = body?.endDate || body["endDate"];
 
-    console.log("Start Date: ", startDate);
-    console.log("End Date: ", endDate);
-
     const { data, error } = await resend.emails.send({
       from: "Acme <onboarding@resend.dev>",
       to: ["h.plytnikas@gmail.com"],
-      subject: "Neue Anfrage",
+      subject: `Neue Anfrage für ${wohnung}`,
       react: await EmailTemplate({
-        email, lastname, message, name, people, petList, pets, startDate, endDate
+        email, lastname, message, name, people, petList, pets, startDate, endDate, wohnung
       }),
     });
 
