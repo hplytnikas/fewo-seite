@@ -61,106 +61,106 @@ export default function Navigation({ home }: NavigationProps) {
       {isMobile ? (
         isHome ? (
           <Navbar
-          className={`${styles.navigation} ${
-            !isHome ? styles.otherBg : styles.homeBg
-          }`}
-          // className={styles.navigation}
-          maxWidth="full"
-          position="static"
-          // isBlurred={false}
-        >
-          <NavbarMenuItem>
-            <LangSwitcher />
-          </NavbarMenuItem>
-        </Navbar>
+            className={`${styles.navigation} ${
+              !isHome ? styles.otherBg : styles.homeBg
+            }`}
+            // className={styles.navigation}
+            maxWidth="full"
+            position="static"
+            // isBlurred={false}
+          >
+            <NavbarMenuItem>
+              <LangSwitcher isHome={isHome} />
+            </NavbarMenuItem>
+          </Navbar>
         ) : (
+          <Navbar
+            className={`${styles.navigation} ${
+              !isHome ? styles.otherBg : styles.homeBg
+            }`}
+            maxWidth="full"
+            position="sticky"
+            onMenuOpenChange={setIsMenuOpen}
+            isMenuOpen={isMenuOpen}
+            isBlurred={false}
+          >
+            <NavbarContent>
+              <NavbarMenuToggle
+                aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+                className="sm:hidden"
+              />
+            </NavbarContent>
+            <NavbarContent>
+              <NavbarItem
+                className={`${styles.requestButton} ${
+                  isHome ? styles.homeNone : ""
+                }`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <Link href={`/${wohnungUrl}/requestform`}>
+                  {t("request now")}
+                </Link>
+              </NavbarItem>
+            </NavbarContent>
+            <NavbarMenu className={styles.menu}>
+              <NavbarMenuItem
+                className={`${styles.navButton} ${styles.menuNavButton} ${
+                  isHome ? styles.homeNone : styles.otherNav
+                }`}
+              >
+                <Link
+                  color="foreground"
+                  href="/"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Home
+                </Link>
+              </NavbarMenuItem>
 
-        <Navbar
-          className={`${styles.navigation} ${
-            !isHome ? styles.otherBg : styles.homeBg
-          }`}
-          
-          maxWidth="full"
-          position="sticky"
-          onMenuOpenChange={setIsMenuOpen}
-          isMenuOpen={isMenuOpen}
-          isBlurred={false}
-        >
-          <NavbarContent>
-            <NavbarMenuToggle
-              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-              className="sm:hidden"
-            />
-          </NavbarContent>
-          <NavbarContent>
-            <NavbarItem
-              className={`${styles.requestButton} ${isHome ? styles.homeNone : ""}`}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              <Link href={`/${wohnungUrl}/requestform`}>
-                {t("request now")}
-              </Link>
-            </NavbarItem>
-          </NavbarContent>
-          <NavbarMenu className={styles.menu}>
-            <NavbarMenuItem
-              className={`${styles.navButton} ${styles.menuNavButton} ${
-                isHome ? styles.homeNone : styles.otherNav
-              }`}
-            >
-              <Link
-                color="foreground"
-                href="/"
-                onClick={() => setIsMenuOpen(false)}
+              <NavbarMenuItem
+                className={` ${styles.navButton} ${styles.menuNavButton} ${
+                  isHome ? styles.homeNone : styles.otherNav
+                }`}
               >
-                Home
-              </Link>
-            </NavbarMenuItem>
+                <Link
+                  href={`/${wohnungUrl}/availability`}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {t("availability")}
+                </Link>
+              </NavbarMenuItem>
+              <NavbarMenuItem
+                className={`${styles.navButton} ${styles.menuNavButton} ${
+                  isHome ? styles.homeNone : styles.otherNav
+                }`}
+              >
+                <Link
+                  href={`/${wohnungUrl}/gallery`}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {t("gallery")}
+                </Link>
+              </NavbarMenuItem>
+              <NavbarMenuItem
+                className={`${styles.navButton} ${styles.menuNavButton} ${
+                  isHome ? styles.homeNone : styles.otherNav
+                }`}
+              >
+                <Link
+                  href={`/${wohnungUrl}/contact`}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {t("contact")}
+                </Link>
+              </NavbarMenuItem>
 
-            <NavbarMenuItem
-              className={` ${styles.navButton} ${styles.menuNavButton} ${
-                isHome ? styles.homeNone : styles.otherNav
-              }`}
-            >
-              <Link
-                href={`/${wohnungUrl}/availability`}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {t("availability")}
-              </Link>
-            </NavbarMenuItem>
-            <NavbarMenuItem
-              className={`${styles.navButton} ${styles.menuNavButton} ${
-                isHome ? styles.homeNone : styles.otherNav
-              }`}
-            >
-              <Link
-                href={`/${wohnungUrl}/gallery`}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {t("gallery")}
-              </Link>
-            </NavbarMenuItem>
-            <NavbarMenuItem
-              className={`${styles.navButton} ${styles.menuNavButton} ${
-                isHome ? styles.homeNone : styles.otherNav
-              }`}
-            >
-              <Link
-                href={`/${wohnungUrl}/contact`}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {t("contact")}
-              </Link>
-            </NavbarMenuItem>
-
-            <NavbarMenuItem
-                className={` ${styles.menuNavButton}`}>
-              <LangSwitcher />
-            </NavbarMenuItem>
-          </NavbarMenu>
-        </Navbar>
-      ) ): (
+              <NavbarMenuItem className={` ${styles.menuNavButton}`}>
+                <LangSwitcher isHome={isHome} />
+              </NavbarMenuItem>
+            </NavbarMenu>
+          </Navbar>
+        )
+      ) : (
         <Navbar
           className={`${styles.navigation} ${
             !isHome ? styles.otherBg : styles.homeBg
@@ -172,7 +172,7 @@ export default function Navigation({ home }: NavigationProps) {
         >
           <NavbarContent className={styles.langContent} justify="start">
             <NavbarBrand>
-              <LangSwitcher />
+              <LangSwitcher isHome={isHome} />
             </NavbarBrand>
           </NavbarContent>
           <NavbarContent className={`${styles.mainContent}`} justify="end">

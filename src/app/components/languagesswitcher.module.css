@@ -1,7 +1,6 @@
 
 .langButton {
     background-color: transparent;
-    color: white;
     font-size: 1.1rem;
 }
 
@@ -21,4 +20,12 @@
     .langButton:hover {
         color: #f1c40f;
     }
+}
+
+.home {
+    color: white;
+}
+
+.notHome {
+    color: black;
 }

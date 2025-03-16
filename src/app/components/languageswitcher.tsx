@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import styles from "./languagesswitcher.module.css";
 
-export default function LangSwitcher() {
+export default function LangSwitcher( { isHome } : { isHome: boolean }) {
     const { i18n } = useTranslation();
 
     const changeLanguage = (lng: string) => {
@@ -12,8 +12,8 @@ export default function LangSwitcher() {
 
   return (
     <div className={styles.langContainer}>
-      <button onClick={() => changeLanguage('de')} className={styles.langButton}>DE</button>
-      <button onClick={() => changeLanguage('en')} className={styles.langButton}>EN</button>
+      <button onClick={() => changeLanguage('de')} className={`${styles.langButton} ${isHome ? styles.home : styles.notHome}`}>DE</button>
+      <button onClick={() => changeLanguage('en')} className={`${styles.langButton} ${isHome ? styles.home : styles.notHome}`}>EN</button>
     </div>
   );
 }
