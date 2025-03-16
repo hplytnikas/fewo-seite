@@ -31,3 +31,11 @@
     flex-direction: row;
     gap: 3rem;
 }
+
+@media (max-width: 800px) {
+    .subContainer {
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+    }
+}

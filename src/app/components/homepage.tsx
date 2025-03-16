@@ -25,7 +25,7 @@ export default function Homepage() {
         color: "black",
       }}
     >
-      <h1 className="lg:mt-5 lg:mb-2 text-3xl text-white">{t("welcome")}</h1>
+      <h1 className="lg:mt-5 lg:mb-2 mb-5 text-3xl text-white ">{t("welcome")}</h1>
       <div className={styles.cardContainer}>
         <FewoCard name="Villa for You" image="/schrutka_profile.webp" wohnungUrl="/villaforyou"/>
         <FewoCard name="Apartment Unter der Linde" image="/kefergasse_profile.webp" wohnungUrl="/linde"/>
