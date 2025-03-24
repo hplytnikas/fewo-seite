@@ -26,6 +26,14 @@
     color: white;
 }
 
-.notHome {
-    color: black;
+@media (max-width: 800px){
+    .notHome {
+        color: black;
+    }
+}
+
+@media (min-width: 800px){
+    .notHome {
+        color: white;
+    }
 }
