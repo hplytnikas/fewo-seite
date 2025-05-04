@@ -34,3 +34,10 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+## Project Structure
+
+This project uses the next.js router structure. Each folder in src is technically an endpoint, e.g. /linde, but only /linde and /villaforyou are static directories, while all of the other directories are in [wohnung] which dynamically resolve to linde or villaforyou. Every folder that is an endpoint should have a "page.tsx" file that serves as the landing page. 
+
+Use "pnpm run dev" to start the development server and checkout vercels site: https://fewo-seite.vercel.app 
